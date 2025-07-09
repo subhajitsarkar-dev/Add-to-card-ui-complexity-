@@ -17,7 +17,7 @@ const Nav = () => {
             </Link>
           </div>
 
-          <nav className="hidden grid-cols-3 place-items-center gap-2 sm:grid">
+          <nav className="hidden grid-cols-3 place-items-center gap-2 sm:grid font-mon">
             <Link
               to="/"
               className={

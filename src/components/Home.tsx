@@ -1,6 +1,21 @@
+import { useEffect, useState } from "react";
 import ShoppingCard from "./ShoppingCard";
+import { allProduct } from "../hooks/allProduct";
+import type { Product } from "../lib/types";
 
 const Home = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const fetchProducts = async () => {
+    const result = await allProduct();
+    if (result?.data?.data) {
+      setProducts(result.data.data);
+    }
+  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <main className="container mx-auto px-6 py-2">
@@ -13,14 +28,9 @@ const Home = () => {
             Shope now:
           </h1>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-8 ">
-            <ShoppingCard />
-            <ShoppingCard />
-            <ShoppingCard />
-            <ShoppingCard />
-            <ShoppingCard />
-            <ShoppingCard />
-            <ShoppingCard />
-            <ShoppingCard />
+            {products.map((product) => (
+              <ShoppingCard key={product.id} item={product} />
+            ))}
           </div>
         </section>
       </main>
